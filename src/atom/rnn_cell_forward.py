@@ -72,7 +72,8 @@ class StandardRNNCell:
 class GRUCell:
     def __init__(self, parameters, act_h, act_y):
         """
-        Intialize a single atom of the GRU cell
+        Initialize the GRU cell with optimized matrix concatenation.
+        This approach reduces the number of expensive np.dot operations.
 
         paramters:
             Wax: weight matrix multiplying the input calculating candidate hidden state, shape (n_a, n_x)
@@ -91,14 +92,16 @@ class GRUCell:
         """
         self.Wax = parameters["Wax"]
         self.Waa = parameters["Waa"]
-        self.Wa = np.hstack((parameters["Waa"],parameters["Wax"]))
         self.Wux = parameters["Wux"]
         self.Wua = parameters["Wua"]
-        self.Wu = np.hstack((parameters["Wua"],parameters["Wux"]))
         self.Wrx = parameters["Wrx"]
         self.Wra = parameters["Wra"]
-        self.Wr = np.hstack((parameters["Wra"],parameters["Wrx"]))
         self.Wya = parameters["Wya"]
+
+        # [Optimization] Horizontally stack weights to handle a_prev and xt in one shot
+        self.Wa = np.hstack((parameters["Waa"],parameters["Wax"]))
+        self.Wu = np.hstack((parameters["Wua"],parameters["Wux"]))
+        self.Wr = np.hstack((parameters["Wra"],parameters["Wrx"]))
 
         self.ba = parameters["ba"]
         self.bu = parameters["bu"]
@@ -122,18 +125,19 @@ class GRUCell:
             cache : cache containing a_next, candidate, update_gate, reset_gate, xt, a_prev, self(hyper parameter) at timestamp t    
         """
 
+        # [Optimization] Vertically stack previous state and current input
         gate_input = np.vstack((a_prev, xt))
 
-        # Update Gate
+        # [Update Gate] : Decides how much of the previous memory to carry over to the future.
         #update_gate = af.sigmoid(np.dot(self.Wua, a_prev) + np.dot(self.Wux, xt) + self.bu)
         update_gate = af.sigmoid(np.dot(self.Wu, gate_input) + self.bu)
 
-        # Reset Gate
+        # [Reset Gate] : Decides how much of the past state to ignore when calculating the candidate.
         #reset_gate = af.sigmoid(np.dot(self.Wra, a_prev) + np.dot(self.Wrx, xt) + self.br)
         reset_gate = af.sigmoid(np.dot(self.Wr, gate_input) + self.br)
 
+        # [Candidate hidden state] : Represents new information to be potentially added to the state
         candidate_input = np.vstack((reset_gate * a_prev, xt))
-        # Candidate hidden state
         candidate = np.dot(self.Wa, candidate_input) + self.ba
 
         if self.act_h == "tanh":

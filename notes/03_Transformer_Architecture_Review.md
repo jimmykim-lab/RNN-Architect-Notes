@@ -49,6 +49,6 @@
 - **Summary**: (예: Transformer is not just a model; it's a hardware-aware optimization paradigm.)
 
 ---
-## 📎 References & Evidence
+## References & Evidence
 - [Link to Notes : BPTT and Vanishing Gradient](01_Basic%20RNN_BPTT_and_Vanishing_Gradient.md) 
 - [Link to Notes : Bidirectional & Deep RNN](02_RNN_Final_Bridge_Analysis.md)

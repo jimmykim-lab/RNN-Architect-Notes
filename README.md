@@ -7,7 +7,7 @@ This repository documents a rigorous journey through Sequence Models, focusing o
 ---
 **Phase 1: Core Sequence Engines (March 2026)**
 
-**1. Standard RNN & The BPTT Deep Dive (3/11, commit : 417b115, 76c0a35)**
+**1. Standard RNN & The BPTT Deep Dive - [./notes/01_Basic RNN_BPTT_and_Vanishing_Gradient.md](./notes/01_Basic%20RNN_BPTT_and_Vanishing_Gradient.md) (3/11, commit : 417b115, 76c0a35)**
 
 The foundation of sequential processing, where I explored the mathematical boundaries of gradient flow.
 - **BPTT (Backpropagation Through Time)**: Implemented the full derivative chain from scratch to understand how information travels (and dies) across time.
@@ -40,6 +40,26 @@ The $O(n)$ sequential DNA of RNNs is the ultimate bottleneck for GPU utilization
 - **Deep (Stacked) RNNs (DRNN)**
     - **Observation**: Stacking increases model capacity but creates a "Double Vanishing" problem (Time + Depth).
     - **Verdict**: Inefficient for scaling; more parameters do not solve the sequential bottleneck.    
+
+---
+**Phase 2: The Parallel Revolution (Mid-March 2026 ~)**
+
+**5. Attention Is All You Need: The End of Sequential DNA - [./notes/03_Transformer_Architecture_Review.md](./notes/03_Transformer_Architecture_Review.md) (3/16, commit : 5eb84dd)**
+
+After the structural autopsy of RNNs, I officially pivot to **Attention-based Architectures** to break the $O(n)$ bottleneck and achieve the **Theoretical Optimum**.
+
+- **Beyond the Glass Ceiling**: Quantified how Transformer reduces the maximum path length to $O(1)$, enabling true hardware parallelization (SIMD).
+- **Architecture over Scripts**: Moving from temporal recurrence to constant-time information "teleportation."
+- **Focus**: Efficiency quantization, memory bandwidth optimization, and solving the vanishing gradient at the architectural level.
+
+---
+**Research SOP (Standard Operating Procedure)**
+To ensure bulletproof thinking, every major architecture is vetted through a 5-step protocol:
+1. **Identify the Villain**: Define the core hardware/mathematical bottleneck.
+2. **Systematic Evaluation**: Comparative analysis of complexity.
+3. **Efficiency Quantization**: Benchmarking $O(n)$ vs. $O(1)$ operations.
+4. **Strategic Insight**: Mapping the architecture to the "Cockpit" requirements.
+5. **Technical Proposal**: Final verdict on adoption for the DSO.ai engine.
 
 ---
 **Technical Validation (The Stress Test)**

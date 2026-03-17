@@ -22,14 +22,25 @@ A streamlined approach to memory management, focusing on computational throughpu
 - **Key Insight**: Balanced the trade-off between memory capacity and execution speed.
 
 **3. LSTM (Long Short-Term Memory) - The Memory Highway (3/13, commit : 5322875)**
+
 The most sophisticated engine in the 1st phase, engineered for high-fidelity long-term memory.
 
 - **Hardware-Aware Design:** Weights are horizontally stacked to process $a^{\langle t-1 \rangle}$ and $x^{\langle t \rangle}$ in a single unified operation, optimizing memory bandwidth.
 - **The Cell State (c)**: Implemented a dedicated "Long-term Memory Highway" to persist critical information across long sequences.
 - **Gating Precision**: Forget, Update, and Output gates implemented via Hadamard products for exact signal filtering.
 
-**4. RNN Final Bridge (Bidirectional & Deep RNNs) (3/16, )**
-- [Link](./notes/02_RNN_Final_Bridge_Analysis.md)
+**4. RNN Final Bridge (Bidirectional & Deep RNNs) - [./notes/02_RNN_Final_Bridge_analysis.md](./notes/02_RNN_Final_Bridge_Analysis.md) (3/16, commit : 8bcb98e)**
+
+Despite architectural variations like Bidirectional or Deep layers, the $O(n)$ sequential dependency remains.
+The $O(n)$ sequential DNA of RNNs is the ultimate bottleneck for GPU utilization. 
+
+- **Bidirectional RNNs (BRNN)**
+    - **Observation**: Future context awareness comes at the cost of 2x computation and 100% latency.
+    - **Verdict**: "Causality breaking" makes it unsuitable for real-time monitoring in my "Cockpit" architecture.
+- **Deep (Stacked) RNNs (DRNN)**
+    - **Observation**: Stacking increases model capacity but creates a "Double Vanishing" problem (Time + Depth).
+    - **Verdict**: Inefficient for scaling; more parameters do not solve the sequential bottleneck.    
+
 ---
 **Technical Validation (The Stress Test)**
 Every engine is verified through a rigorous Architect's Testbench (rnn_testbench.py):

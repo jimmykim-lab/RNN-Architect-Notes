@@ -54,6 +54,7 @@ After the structural autopsy of RNNs, I officially pivot to **Attention-based Ar
 
 ---
 **Research SOP (Standard Operating Procedure)**
+
 To ensure bulletproof thinking, every major architecture is vetted through a 5-step protocol:
 1. **Identify the Villain**: Define the core hardware/mathematical bottleneck.
 2. **Systematic Evaluation**: Comparative analysis of complexity.
@@ -63,6 +64,7 @@ To ensure bulletproof thinking, every major architecture is vetted through a 5-s
 
 ---
 **Technical Validation (The Stress Test)**
+
 Every engine is verified through a rigorous Architect's Testbench (rnn_testbench.py):
 1. **Mathematical Consistency**: Verified that Softmax output probabilities sum to exactly 1.0 for all timesteps.
 2. **State Stability**: Monitored the L2 Norm of the Cell State to ensure stable signal propagation without numerical exploding/vanishing.

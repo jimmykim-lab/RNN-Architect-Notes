@@ -24,10 +24,12 @@ A streamlined approach to memory management, focusing on computational throughpu
 **3. LSTM (Long Short-Term Memory) - The Memory Highway (3/13, commit : 5322875)**
 The most sophisticated engine in the 1st phase, engineered for high-fidelity long-term memory.
 
-- * **Hardware-Aware Design:** Weights are horizontally stacked to process $a^{\langle t-1 \rangle}$ and $x^{\langle t \rangle}$ in a single unified operation, optimizing memory bandwidth.
+- **Hardware-Aware Design:** Weights are horizontally stacked to process $a^{\langle t-1 \rangle}$ and $x^{\langle t \rangle}$ in a single unified operation, optimizing memory bandwidth.
 - **The Cell State (c)**: Implemented a dedicated "Long-term Memory Highway" to persist critical information across long sequences.
 - **Gating Precision**: Forget, Update, and Output gates implemented via Hadamard products for exact signal filtering.
 
+**4. RNN Final Bridge (Bidirectional & Deep RNNs) (3/16, )**
+- [Link](./notes/02_RNN_Final_Bridge_Analysis.md)
 ---
 **Technical Validation (The Stress Test)**
 Every engine is verified through a rigorous Architect's Testbench (rnn_testbench.py):

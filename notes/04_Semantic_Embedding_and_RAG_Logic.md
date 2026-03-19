@@ -13,7 +13,8 @@
     - **The Problem**: The **One-hot encoding** can't contain the relationship between words (contexts). It has fractured dimension $O(V)$ ; V is number of vocabulary. 
     - **The Solution**: The **Semantic Density** can be achieved by positioning tokens (word) in a **high-dimensional space ($d_{model}$)**. Using this Semantic Density, the **Word Embedding algorithms** can learn similar features for concepts that should be mor **related** and get mapped to more **similar feature vectors**. 
     - **Mathematical Mapping**: The Embedding Vector $e_j$ for specific token $j$ (word $j$) is representative like Embedding Matrix $E$ multiplying One-hot vector $o_j$. The One-hot vector $o_j$ is for filtering out specific token $j$ (word $j$) from Embedding Matrix $E$. This is the process of unifying fragmented data into a **Single Integrated Coordinate System**. By enabling all data to communicate within the same vector space, the $O(n)$ relational complexity is compressed into a geometric structure.
-    $$e_j = E \cdot o_j$$
+
+$$e_j = E \cdot o_j$$
     
 - **Domain Implementation Insight (Chip Design)**: The fragmented **design data**, **knowledge** and **manuals** can be unified and standardized into a **Single Integrated Coordinate System**. By enabling all data to communicate within the same vector space, the $O(n)$ relational complexity is compressed into a geometric structure for **maximizing search efficiency**.
 
@@ -24,9 +25,9 @@
 ### **Vector Arithmetic: Analogy Reasoning**
 > **Target Lecture**: `Properties of Word Embeddings`
 
-- **General Core Logic**: In high dimensional space, the relationship between the embedding vectors is preserved as **Linear Translation**. 
-    $$e_{king} - e_{man} + e_{woman} \approx e_{queen}$$
+- **General Core Logic**: In high dimensional space, the relationship between the embedding vectors is preserved as **Linear Translation**.
 
+$$e_{king} - e_{man} + e_{woman} \approx e_{queen}$$
 - **Domain Implementation Insight (Chip Design)**: 
     - **Metric Relationship**: Utilized to predict optimization trends for specific process nodes or infer correlations between similar design patterns through logical operations such as *Standard Cell - Power + Area*.
 
@@ -35,7 +36,8 @@
 
 - **General Core Logic**: 
     - **Similarity**: The similarity is determined by measuring the **directional orientation($\theta$)** between two vectors rather than their **Euclidean distance**.
-    $$\text{similarity} = \cos(\theta) = \frac{\mathbf{u} \cdot \mathbf{v}}{\|\mathbf{u}\| \|\mathbf{v}\|}$$
+
+      $$\text{similarity} = \cos(\theta) = \frac{\mathbf{u} \cdot \mathbf{v}}{\|\mathbf{u}\| \|\mathbf{v}\|}$$
     - **Intent Oriented**: It is mechanism to give high score if these vectors has similar Intent even if the size of vectors has different lengths.
 
 - **Domain Implementation Insight (Chip Design)**: 

@@ -11,7 +11,7 @@
 ### **From One-Hot to Dense Vectors**
 - **General Core Logic**:
     - **The Problem**: The **One-hot encoding** can't contain the relationship between words (contexts). It has fractured dimension $O(V)$ ; V is number of vocabulary. 
-    - **The Solution**: The **Semantic Density** can be achieved by positioning tokens (word) in a **high-dimensional space ($d_{model}$)**. Using this Semantic Density, the **Word Embedding algorithms** can learn similar features for concepts that should be mor **related** and get mapped to more **similar feature vectors**. 
+    - **The Solution**: The **Semantic Density** can be achieved by positioning tokens (word) in a **high-dimensional space ($d_{model}$)**. Using this Semantic Density, the **Word Embedding algorithms** can learn similar features for concepts that should be more **related** and get mapped to more **similar feature vectors**. 
     - **Mathematical Mapping**: The Embedding Vector $e_j$ for specific token $j$ (word $j$) is representative like Embedding Matrix $E$ multiplying One-hot vector $o_j$. The One-hot vector $o_j$ is for filtering out specific token $j$ (word $j$) from Embedding Matrix $E$. This is the process of unifying fragmented data into a **Single Integrated Coordinate System**. By enabling all data to communicate within the same vector space, the $O(n)$ relational complexity is compressed into a geometric structure.
 
 $$e_j = E \cdot o_j$$

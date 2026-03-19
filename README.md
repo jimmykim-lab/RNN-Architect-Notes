@@ -5,6 +5,11 @@ _**The Cockpit Architect: Mastering Sequential Intelligence from Scratch**_
 This repository documents a rigorous journey through Sequence Models, focusing on **Architecture over Scripts**. It transforms deep-learning theory into robust, professional-grade "Cockpit" systems.
 
 ---
+
+**Current Mission**: 🎯 [March 19] Deconstructing **Section 3.2 Attention Mechanism** (Multi-Head & Scaled Dot-Product) 
+
+---
+
 **Phase 1: Core Sequence Engines (March 2026)**
 
 **1. Standard RNN & The BPTT Deep Dive - [./notes/01_Basic RNN_BPTT_and_Vanishing_Gradient.md](./notes/01_Basic%20RNN_BPTT_and_Vanishing_Gradient.md) (3/11, commit : 417b115, 76c0a35)**
@@ -44,13 +49,15 @@ The $O(n)$ sequential DNA of RNNs is the ultimate bottleneck for GPU utilization
 ---
 **Phase 2: The Parallel Revolution (Mid-March 2026 ~)**
 
-**5. Attention Is All You Need: The End of Sequential DNA - [./notes/03_Transformer_Architecture_Review.md](./notes/03_Transformer_Architecture_Review.md) (3/16, commit : 5eb84dd)**
+**5. Attention Is All You Need: The End of Sequential DNA - [./notes/03_Transformer_Architecture_Review.md](./notes/03_Transformer_Architecture_Review.md) (3/16 ~ 3/19, commit : 5eb84dd/96749bc, Ongoing)**
 
-After the structural autopsy of RNNs, I officially pivot to **Attention-based Architectures** to break the $O(n)$ bottleneck and achieve the **Theoretical Optimum**.
+After the structural autopsy of RNNs, I officially pivot to **Attention-based Architectures**. This entry deconstructs the Transformer not just as a model, but as a high-throughput **Parallel Engine**.
 
-- **Beyond the Glass Ceiling**: Quantified how Transformer reduces the maximum path length to $O(1)$, enabling true hardware parallelization (SIMD).
-- **Architecture over Scripts**: Moving from temporal recurrence to constant-time information "teleportation."
-- **Focus**: Efficiency quantization, memory bandwidth optimization, and solving the vanishing gradient at the architectural level.
+- **The O(1) Revolution (3/16)**: Quantified how Transformer reduces the maximum path length to $O(1)$, enabling true hardware parallelization (SIMD) and constant-time "information teleportation."
+- **Input Pipeline & Numerical Governance (3/18 ~ 3/19)**: A deep dive into Section 3.4 & 3.5 to master the "Materials" before the logic.
+    - **SNR (Signal-to-Noise Ratio) Control**: Implemented $\sqrt{d_{model}}$ scaling as a form of Numerical Governance to preserve semantic signals against positional noise.
+    - **Weight Sharing Strategy**: Analyzed the "Dual-End" efficiency where Input/Output embeddings share the same context map to slash VRAM consumption in half.
+    - **Temporal DNA (Positional Encoding)**: Engineered a "Time without a Clock" using sinusoidal waves, transforming temporal order into a spatial coordinate system for $O(1)$ efficiency.
 
 **6. Semantic Embedding & RAG Logic: The Coordinate System of Intelligence - [./notes/04_Semantic_Embedding_and_RAG_Logic.md](./notes/04_Semantic_Embedding_and_RAG_Logic.md) (3/18, commit : e2b72fb)**
 

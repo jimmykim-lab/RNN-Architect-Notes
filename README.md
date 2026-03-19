@@ -52,6 +52,16 @@ After the structural autopsy of RNNs, I officially pivot to **Attention-based Ar
 - **Architecture over Scripts**: Moving from temporal recurrence to constant-time information "teleportation."
 - **Focus**: Efficiency quantization, memory bandwidth optimization, and solving the vanishing gradient at the architectural level.
 
+**6. Semantic Embedding & RAG Logic: The Coordinate System of Intelligence - [./notes/04_Semantic_Embedding_and_RAG_Logic.md](./notes/04_Semantic_Embedding_and_RAG_Logic.md) (3/18, commit : e2b72fb)**
+
+To feed the Parallel Revolution, we must first redesign how data is represented. This entry defines the **Geometric World Model** for the DSO.ai engine.
+
+- **Geometric Intelligence**: Transitioned from $O(V)$ symbolic one-hot encoding to $d_{model}$ high-dimensional dense vectors. Mapped fragmented design data into a **Single Integrated Coordinate System**.
+- **RAG (Retrieval-Augmented Generation)**: Designed the **"Safety Controller"** that bridges probabilistic AI and deterministic engineering.
+- **Anchoring Mechanism**: Established **Cosine Similarity** as the physical search engine to anchor AI's creative potential to 0.001ns-level technical spec manuals.
+- **Governance Layer**: Implemented mathematical **Debiasing (Neutralization/Equalization)** to eliminate tool-biased outliers and ensure engineering determinism.
+- **Strategic Asset**: Defined a "Standardized Chip Design Embedding" strategy to enable efficient **Transfer Learning** on private customer design flows.
+
 ---
 **Research SOP (Standard Operating Procedure)**
 

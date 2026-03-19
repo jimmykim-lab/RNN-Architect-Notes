@@ -1,51 +1,82 @@
 # [Architecture Review] Attention Is All You Need: The End of Sequential DNA - [Link to Paper : Attention IS All You Need](https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf)
 
-- **Date**: 2026-03-16 (Start)
+- **Date**: 2026-03-16 (Start) - 2026-03-19 (Ongoing)
 - **Status**: 
-    - [2026-03-16] Phase 1 Complete: (Paper Section 1 & 2 analyzed; Markdown Section I & III documented) 
-    - [2026-03-18 Target]: Section II (Transformer Core Architecture) & Self-Attention Mathematics.
+    - ✅ [2026-03-16] **Section I & III Complete**: Analysis of Section 1 Introduction, Section 2 Background, and Complexity ($O(n)$ vs $O(1)$ via Table 1).
+    - ✅ [2026-03-18] **Section II (Part 1) Complete**: The Input Pipeline (Section 3.4 Embeddings & 3.5 Positional Encoding).
+    - 🎯 [2026-03-19 Target]: **Section II (Part 2)**: Core Architecture & Attention Mechanism (Section 3.1 Model Architecture & 3.2 Multi-Head Attention).
 - **Goal**: Deconstruct the Transformer architecture to achieve the **Theoretical Optimum**.
 
 ---
 
-## I. The Motivation: Why RNNs Must Die
-### **The Sequential Bottleneck**:
+## I. The Motivation: Why RNNs Must Die (Section 1 Introduction, Section 2 Background)
+
+### **The Sequential Bottleneck** (Section 1 Introduction):
 - *"**Sequential nature precludes parallelization** within training examples, which becomes critical at longer sequence lengths, as memory constraints limit batching across examples."* 
+
 - **Architect's View** : The core limitation of RNN architecture is their sequential nature over time. The GRU and LSTM have been established as state-of-the-art approaches but the fundamental constraint of sequential computation remains. The sequential chain ($a^{\langle t \rangle} = f(a^{\langle t-1 \rangle}, x^{\langle t \rangle})$) creates an optimization bottleneck (Vanishing Gradient) and a computational bottleneck ($O(n)$ serial execution). Other approaches like Bidirectional RNN and Deep RNN require 2x computation costs and 100% latency or double vanishing issue which make it unsuitable for real-time monitoring and inefficient for scaling. Modern GPUs are built for SIMD (Single Instruction, Multiple Data) but this limitation forces serial execution so that low utilization is inevitable. And if sequence is getting longer and longer, the bottleneck of memory bandwidth is getting critical since it should send/receive a bunch of hidden state due to $O(n)$ dependency. It definitely degrades latency and performance of system.
-### **The Distance Problem**: 
+
+### **The Distance Problem** (Section 2 Background): 
 - *"The goal of reducing sequential computation also forms the foundation of the Extended Neural GPU, **ByteNet** and **ConvS2S**, all of which use **convolutional neural networks** as basic building block, computing hidden representations in parallel for all input and output positions. In these models, the number of operations required to relate signals from two arbitrary input or output positions **grows in the distance between positions**, **linearly for ConvS2S and logarithmically for ByteNet**. This makes it more difficult to learn dependencies between distant positions."*
-### **The $O(1)$ Revolution**: 
+
+### **The $O(1)$ Revolution** (Section 2 Background): 
 - *"In the Transformer this is reduced to a constant number of operations, albeit at the cost of reduced effective resolution due to averaging attention-weighted positions, an effect we counteract with Multi-Head Attention as described in section 3.2."*
+
 - **Architect's View** : This paper states **Transformer** can reduce the number of operations to a **constant number** unlike legacy models where complexity grows with distance between positions. It can solve the core limitation of RNN architecture which is sequential computation so that optimization and computation bottleneck can be resolved correspondingly. And it would be helpful for the bottleneck of memory bandwidth dramatically. In Table 1 in paper, this innovation is quantized as **Maximum Path Length ($O(1)$)**. It means all information is connected by single-step regardless of length of sequence. This is core theory to destroy dependency of RNN on $O(n)$. 
 
 ---
 
-## II. The Engine: Transformer Core Architecture
+## II. The Engine: Transformer Core Architecture (Section 3 Model Architecture)
 
-### **The Input Pipeline: The Materials (Material Preparation)**
-> **Focus**: How to transform raw data into "Intelligent Material" before it enters the Attention engine.
+### **The Input Pipeline: The Materials (Material Preparation)** (Section 3.4 Embedding and Softmax, Section 3.5 Positional Encoding)
 
-#### **Embeddings (Creating Semantic Coordinates)**:
-- *"In our model, we use learned embeddings to convert the input tokens and output tokens to vectors of dimension $d_{model}$."*
-- *"In the embedding layers, we multiply those weights by $\sqrt{d_{model}}$.​"*
-- **Mechanism**: Learned embeddings to convert input tokens to vectors of dimension $d_{model} = 512$.
-- **Architect's View**: In this system, we use shared weights between input/output embeddings to optimize memory bandwidth. A crucial detail is the **scaling factor $\sqrt{d_{model}}$**, which prevents the dot-product attention from growing too large in magnitude, ensuring stable gradient flow. This is the first "knob" to ensure **Engineering Determinism**.
-Architect's View: 
-    From Tokens to Tensors: 임베딩은 단순한 치환이 아니라, 이산적인 데이터를 연속적인 벡터 공간(Vector Space)으로 맵핑하는 과정입니다. 이는 지미님이 설계할 RAG 시스템에서 **'지식의 좌표'**를 생성하는 기초가 됩니다.
-    The  d model Scaling: 왜 굳이 제곱근 값을 곱할까요? 이는 차원이 커질수록 Dot-product 값이 커져 Softmax의 기울기가 소실되는 것을 방지하기 위한 수학적 안전장치입니다. 아키텍트에게는 시스템의 **Numerical Stability(수치적 안정성)**를 확보하는 '결정론적 설계'의 일환으로 읽힙니다.
+#### **Embeddings (Creating Semantic Coordinates)** (Section 3.4 Embedding and Softmax):
+- *"In our model, we use **learned embeddings** to convert the input tokens and output tokens to **vectors of dimension $d_{model}$**."*
+- *"In the embedding layers, we multiply those **weights by $\sqrt{d_{model}}$**.​"*
 
-#### **Positional Encoding (Time without a Clock)**:
-- *"Since our model contains no recurrence and no convolution, in order for the model to make use of the order of the sequence, we must inject some information about the relative or absolute position of the tokens in the sequence."*
-- *"We chose the sinusoidal version because it may allow the model to extrapolate to sequence lengths longer than those encountered during training."*
-- **Mechanism**: Injecting relative/absolute position using Sine and Cosine functions of different frequencies.
-- **Why Sinusoids?**: Unlike RNNs that learn position through recurrence ($O(n)$), Sinusoids allow the model to *calculate* any position in $O(1)$. It allows the model to extrapolate to sequence lengths longer than those encountered during training.
-- **Architect's View**: This is "Time without a Clock." We provide the spatial coordinates to the model so it can perform SIMD operations across the entire sequence while still understanding the "Sequential DNA" of the hardware logic or waveform.
-Architect's View:
-    The End of Recurrence: RNN은 '시간(Order)'을 처리하기 위해 $O(n)$의 순차 연산을 강제했습니다. 하지만 Transformer는 위치 정보를 **함수값(Sinusoid)**으로 계산하여 입력값에 '더해버림'으로써, 순서를 지키면서도 연산은 $O(1)$로 병렬화하는 혁신을 이뤘습니다.
-    Extrapolation Power: 학습하지 않은 긴 시퀀스(Longer Sequence)에 대해서도 유연하게 대처할 수 있는 '주기 함수'를 선택했다는 점은, 시스템의 **Scalability(확장성)**를 설계 단계에서 이미 고려했음을 보여줍니다. 칩 설계 데이터처럼 시퀀스가 매우 긴 도메인에서 이 방식은 필수적입니다.
+- **Mechanism**: 
+    - **Embedding**: Learned embeddings is used to convert input tokens and output tokens to **vectors of dimension $d_{model}$** to have Semantic Density.
+    - **Transformation & Softmax**: The embedded vector is multiplied by a massive weight matrix W, transforming it onto a high-dimensional space matching the full vocabulary size. The Softmax normalizes all scores into a range between 0 and 1, ensuring the total sum equals exactly 1.0.
+    With Transformation and Softmax, the system can get predicted next-token probabilities.
+    - **Weights Sharing**: The Same Weight Matrix is shared between input and output embedding layers for efficiency **since only difference of these two layers is direction** so should share context map.
+    - **Scaling Weights**: The Weight Matrix for input and output embedding layers is multiplied by **$\sqrt{d_{model}}$**.
 
-### **The Attention Mechanism: Multi-Head Attention**
-*(이 부분은 논문 3.2절을 읽고 이어서 작성하시면 됩니다.)*
+- **Architect's View**: 
+    - **From Tokens to Tensors**: The **Embeddings** not merely a simple substitution, but a process of mapping discrete data into a **Continuous Vector Space** containing Semantic Density for relation between tokens. This serves as the foundation for creating the **Coordinates of Knowledge** in the RAG system.
+    - **The Bridge to Human Language**: The **Transformation & Softmax** is a **Digital-to-Analog** converter that maps the abstract vector space back into a discrete word space. It is a process of asking, **'How closely does this abstract meaning ($d_{model}$) resemble each word in our vocabulary ($V$)?'** This is the moment where 'Logits' are assigned to each word and the final stage of the Engineering Determinism. It converts abstract signals into a probabilistic certainty.
+    - **Efficiency Logic**: The **Sharing Weights** can maximize **memory efficiency** by reducing number of parameters. This eliminates the need for redundant storage so slashes memory bandwidth in half. From the perspective of the hardware accelerator, this is a masterstroke that drastically reduces VRAM consumption.
+    - **Numerical Governance**: Multiplying the embedding weights by $\sqrt{d_{model}}$ is not mere arithmetic; it is a form of Numerical Governance for **Engineering Determinism** designed to **prevent loss of context** and **maintain the discriminative power of Softmax** in high-dimensional spaces.
+        - **Signal-to-Noise Ratio(SNR) Control**: In the Transformer architecture, embeddings ($E$) and positional information ($PE$) are combined through summation ($E + PE$). Learned embeddings often maintain very small magnitudes depending on their initialization. If the embedding values are too minute, the original 'semantic meaning' of the word is drowned out by the 'noise' of the positional information the moment they are merged. By scaling the embeddings by $\sqrt{d_{model}}$, it adequately amplify the vector magnitude. This ensures the word's inherent meaning remains distinct and robust even after being integrated with positional data.
+        - **Gradient Preservation**: As the vector dimension ($d_{model}$) increases, the dot-product values of embedding vectors tend to grow exponentially and the variance of the dot-product between two vectors grows in proportion to $d_{model}$. Excessive dot-product magnitudes cause the Softmax function to saturate, driving outputs to extreme values of 0 or 1. This leads to Gradient Vanishing, where the derivative approaches zero, effectively halting the learning process. Dividing by or pre-multiplying by $\sqrt{d_{model}}$ acts as a 'mathematical damper' that normalizes this variance to 1, ensuring the Softmax input remains within the 'Active Region' for effective learning.
+        Pre-scaling the embeddings in Section 3.4 is a preemptive measure to control potential 'numerical explosion' during the Attention operations (Section 3.2.1).
+
+#### **Positional Encoding (Injecting Temporal DNA)** (Section 3.5 Positional Encoding):
+- *"Since our model contains no recurrence and no convolution, in order for the model to make use of the order of the sequence, we must **inject some information about the relative or absolute position** of the tokens in the sequence."*
+- *"We chose the **sinusoidal version** because it may allow the model to **extrapolate** to sequence lengths longer than those encountered during training."*
+
+- **Mechanism - The "Mathematical Clock" System**:
+    - **Mathematical Timestamp**: Because Transformers process all tokens simultaneously (Parallelism), they lack a natural sense of "time." Positional Encoding acts as a **"Digital Seat Ticket,"** assigning a unique mathematical coordinate to every token so the model knows "who sits where."
+    - **The Sinusoidal Formula**: Each word is equipped with 512 different "clocks" (dimensions). The clocks at the beginning spin fast (high frequency), while those at the end spin slowly (low frequency). This creates a **Unique Fingerprint** for every position:
+        $$PE_{(pos, 2i)} = \sin\left(\frac{pos}{10000^{2i/d_{model}}}\right)$$
+        $$PE_{(pos, 2i+1)} = \cos\left(\frac{pos}{10000^{2i/d_{model}}}\right)$$
+    - **Linear Relationship**: Using Sine and Cosine allows the model to calculate the distance between words easily. For any fixed offset $k$, $PE_{pos+k}$ can be represented as a **linear function** of $PE_{pos}$. It’s like knowing that "15 minutes later" is always a $90^\circ$ turn on the clock face, no matter what time it is now.
+    - **Extrapolation Capability**: Unlike learned positions, this functional approach allows the model to **"calculate"** the position of the 1,001st word even if it was only trained on 500 words. It follows the continuous wave pattern.
+
+- **Architect's View**: 
+    - **Time without a Clock**: In RNNs, time was a physical bottleneck ($O(n)$). In Transformers, time is treated as a **Spatial Coordinate**. We provide a "Compass of Time" so the system can perform SIMD (Single Instruction, Multiple Data) operations across the entire sequence while still respecting the **"Sequential DNA"** of the data.
+    - **The End of Recurrence ($O(1)$ Revolution)**: By *calculating* position instead of *waiting* for it, we transform temporal dependency into a constant-time mathematical addition. This is the ultimate **"Architectural Bypass"** for hardware scaling on GPUs.
+    - **Information Fusion ($E + PE$)**: We "layer" these positional waves on top of the semantic embeddings. This is a high-efficiency technique that keeps the data compact for memory bandwidth. 
+    - **The Necessity of Scaling**: To ensure the "Time Stamp" ($PE$) doesn't drown out the "Word Meaning" ($E$), we rely on the **Numerical Governance** established in Section 3.4 (scaling by $\sqrt{d_{model}}$). This keeps the semantic signal robust even after the temporal DNA is injected.
+
+
+### **The Processing Core: System Assembly & Intelligence** (Section 3.1 Encoder and Decoder Stacks, Section 3.2 Attention) 
+*🎯 [2026-03-19 Target]: **Section II (Part 2)**: Core Architecture & Attention Mechanism (Section 3.1 Model Architecture & 3.2 Multi-Head Attention)*
+#### **Model Architecture (The Framework: The Multi-Stage Stack)** (Section 3.1 Encoder and Decoder Stacks)
+Residual Connection: "The Highway System" - 신호 감쇄를 막는 고속도로.
+LayerNorm: "The Voltage Regulator" - 각 층의 출력을 표준 범위 내로 가두는 전압 조절기.
+#### **The Attention Mechanism: Multi-Head Attention** (Section 3.2 Attention)
+Multi-Head: "Parallel Sensory Filters" - 같은 데이터를 8개의 서로 다른 시각(헤드)으로 동시에 필터링하는 병렬 센서.
+Scaled Dot-Product: 3.4절에서 언급한 "Variance Damper" 로직이 여기서 실제 연산으로 구현됨을 강조.
 
 ---
 
@@ -81,3 +112,7 @@ Architect's View:
 ## References & Evidence
 - [Link to Notes : BPTT and Vanishing Gradient](01_Basic%20RNN_BPTT_and_Vanishing_Gradient.md) 
 - [Link to Notes : Bidirectional & Deep RNN](02_RNN_Final_Bridge_Analysis.md)
+- [Link to Notes : Sematic Embedding](04_Semantic_Embedding_and_RAG_Logic.md)
+- [Link to Article : Understanding Positional Encoding in Transformers](https://erdem.pl/2021/05/understanding-positional-encoding-in-transformers)
+- [Link to Blog : Jay Alammar - The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/)
+- [Link to YouTube : StatQuest - Transformer Neural Networks, ChatGPT's Foundation](https://youtu.be/zxQyTK8quyY?si=UxMW5GcgRg50IUKk)

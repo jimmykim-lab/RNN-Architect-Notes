@@ -18,11 +18,36 @@
 - *"In the Transformer this is reduced to a constant number of operations, albeit at the cost of reduced effective resolution due to averaging attention-weighted positions, an effect we counteract with Multi-Head Attention as described in section 3.2."*
 - **Architect's View** : This paper states **Transformer** can reduce the number of operations to a **constant number** unlike legacy models where complexity grows with distance between positions. It can solve the core limitation of RNN architecture which is sequential computation so that optimization and computation bottleneck can be resolved correspondingly. And it would be helpful for the bottleneck of memory bandwidth dramatically. In Table 1 in paper, this innovation is quantized as **Maximum Path Length ($O(1)$)**. It means all information is connected by single-step regardless of length of sequence. This is core theory to destroy dependency of RNN on $O(n)$. 
 
+---
+
 ## II. The Engine: Transformer Core Architecture
-*수요일(수)에 채울 섹션입니다.*
-- **Multi-Head Attention**: Parallelizing the "Search & Match" process.
-- **Feed-Forward Networks**: Local processing without temporal dependency.
-- **Positional Encoding**: How to inject "Time" without a "Clock" (Recurrence).
+
+### **The Input Pipeline: The Materials (Material Preparation)**
+> **Focus**: How to transform raw data into "Intelligent Material" before it enters the Attention engine.
+
+#### **Embeddings (Creating Semantic Coordinates)**:
+- *"In our model, we use learned embeddings to convert the input tokens and output tokens to vectors of dimension $d_{model}$."*
+- *"In the embedding layers, we multiply those weights by $\sqrt{d_{model}}$.​"*
+- **Mechanism**: Learned embeddings to convert input tokens to vectors of dimension $d_{model} = 512$.
+- **Architect's View**: In this system, we use shared weights between input/output embeddings to optimize memory bandwidth. A crucial detail is the **scaling factor $\sqrt{d_{model}}$**, which prevents the dot-product attention from growing too large in magnitude, ensuring stable gradient flow. This is the first "knob" to ensure **Engineering Determinism**.
+Architect's View: 
+    From Tokens to Tensors: 임베딩은 단순한 치환이 아니라, 이산적인 데이터를 연속적인 벡터 공간(Vector Space)으로 맵핑하는 과정입니다. 이는 지미님이 설계할 RAG 시스템에서 **'지식의 좌표'**를 생성하는 기초가 됩니다.
+    The  d model Scaling: 왜 굳이 제곱근 값을 곱할까요? 이는 차원이 커질수록 Dot-product 값이 커져 Softmax의 기울기가 소실되는 것을 방지하기 위한 수학적 안전장치입니다. 아키텍트에게는 시스템의 **Numerical Stability(수치적 안정성)**를 확보하는 '결정론적 설계'의 일환으로 읽힙니다.
+
+#### **Positional Encoding (Time without a Clock)**:
+- *"Since our model contains no recurrence and no convolution, in order for the model to make use of the order of the sequence, we must inject some information about the relative or absolute position of the tokens in the sequence."*
+- *"We chose the sinusoidal version because it may allow the model to extrapolate to sequence lengths longer than those encountered during training."*
+- **Mechanism**: Injecting relative/absolute position using Sine and Cosine functions of different frequencies.
+- **Why Sinusoids?**: Unlike RNNs that learn position through recurrence ($O(n)$), Sinusoids allow the model to *calculate* any position in $O(1)$. It allows the model to extrapolate to sequence lengths longer than those encountered during training.
+- **Architect's View**: This is "Time without a Clock." We provide the spatial coordinates to the model so it can perform SIMD operations across the entire sequence while still understanding the "Sequential DNA" of the hardware logic or waveform.
+Architect's View:
+    The End of Recurrence: RNN은 '시간(Order)'을 처리하기 위해 $O(n)$의 순차 연산을 강제했습니다. 하지만 Transformer는 위치 정보를 **함수값(Sinusoid)**으로 계산하여 입력값에 '더해버림'으로써, 순서를 지키면서도 연산은 $O(1)$로 병렬화하는 혁신을 이뤘습니다.
+    Extrapolation Power: 학습하지 않은 긴 시퀀스(Longer Sequence)에 대해서도 유연하게 대처할 수 있는 '주기 함수'를 선택했다는 점은, 시스템의 **Scalability(확장성)**를 설계 단계에서 이미 고려했음을 보여줍니다. 칩 설계 데이터처럼 시퀀스가 매우 긴 도메인에서 이 방식은 필수적입니다.
+
+### **The Attention Mechanism: Multi-Head Attention**
+*(이 부분은 논문 3.2절을 읽고 이어서 작성하시면 됩니다.)*
+
+---
 
 ## III. Efficiency Quantization (Complexity Analysis)
 ### **Table 1: Comparison of Layer Types**
@@ -40,10 +65,14 @@
 - **[Sequential Operations] SIMD Utilization:** The $O(1)$ sequential operations allow modern GPUs to leverage their full **SIMD (Single Instruction, Multiple Data)** potential. Unlike RNNs that force serial execution and leave GPU cores idle, Transformer ensures that computational resources are fully saturated by dispatching operations in parallel.
 - **[Maximum Path Length] Information Teleportation:** The $O(1)$ path length provides "Information Teleportation," allowing gradients to flow directly between any two positions regardless of their distance. This solves the **Vanishing Gradient** issue at the architectural level, ensuring high-fidelity signal propagation throughout the network.
 
+---
+
 ## IV. Systematic Evaluation (DSO.ai Strategic Insight)
 *SOP의 핵심: 이 엔진을 실제 우리 제품에 어떻게 이식할 것인가.*
 - **Reliability Assessment**: Training stability vs. RNN's vanishing gradient.
 - **Proposed Application**: How Attention can optimize Chip Design Layout bottlenecks.
+
+---
 
 ## V. Final Verdict
 - **Summary**: (예: Transformer is not just a model; it's a hardware-aware optimization paradigm.)

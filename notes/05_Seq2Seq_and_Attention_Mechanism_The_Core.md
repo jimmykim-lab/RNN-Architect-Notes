@@ -31,16 +31,16 @@
 - **The Alignment Model: Computing Energy ($e^{\langle t, t' \rangle}$)**:
     - **Mechanism**: $e^{\langle t, t' \rangle}$ represents the "Energy" or "Alignment score" between the previous decoder state ($s^{\langle t-1 \rangle}$) and the encoder state ($a^{\langle t' \rangle}$).
     - **Computation**: In RNN-based attention, this is typically calculated using a small, separate neural network with its own trainable parameters ($W_a, v_a$).
-    
-    $$e^{\langle t, t' \rangle} = v_a^T \tanh(W_a [s^{\langle t-1 \rangle}; a^{\langle t' \rangle}])$$
-    
     - **The Downside**: This "small neural network" must be computed for every pair of $(t, t')$, creating a massive **Computational Overhead**. Modern **Transformers** replace this heavy $tanh$ operation with the much faster **Scaled Dot-Product**.
+  
+$$e^{\langle t, t' \rangle} = v_a^T \tanh(W_a [s^{\langle t-1 \rangle}; a^{\langle t' \rangle}])$$
 
 - **The Attention Score & Weight:**
+  
 $$\alpha^{\langle t, t' \rangle} = \frac{\exp(e^{\langle t, t' \rangle})}{\sum_{t'=1}^{T_x} \exp(e^{\langle t, t' \rangle})}$$
 
-
 - **The Context Vector:**
+  
 $$c^{\langle t \rangle} = \sum_{t'} \alpha^{\langle t, t' \rangle} a^{\langle t' \rangle}$$
 
 - **Domain Implementation Insight (Chip Design)**: 

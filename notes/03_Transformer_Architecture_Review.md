@@ -4,7 +4,7 @@
 - **Status**: 
     - ✅ [2026-03-16] **Section I & III Complete**: Analysis of Section 1 Introduction, Section 2 Background, and Complexity ($O(n)$ vs $O(1)$ via Table 1).
     - ✅ [2026-03-18] **Section II (Part 1) Complete**: The Input Pipeline (Section 3.4 Embeddings & 3.5 Positional Encoding).
-    - 🎯 [2026-03-19 Target]: **Section II (Part 2)**: Core Architecture & Attention Mechanism (Section 3.1 Model Architecture & 3.2 Multi-Head Attention).
+    - 🎯 [2026-03-20 Target]: **Section II (Part 2)**: Core Architecture & Attention Mechanism (Section 3.1 Model Architecture & 3.2 Multi-Head Attention).
 - **Goal**: Deconstruct the Transformer architecture to achieve the **Theoretical Optimum**.
 
 ---
@@ -70,7 +70,7 @@
 
 
 ### **The Processing Core: System Assembly & Intelligence** (Section 3.1 Encoder and Decoder Stacks, Section 3.2 Attention) 
-*🎯 [2026-03-19 Target]: **Section II (Part 2)**: Core Architecture & Attention Mechanism (Section 3.1 Model Architecture & 3.2 Multi-Head Attention)*
+*🎯 [2026-03-20 Target]: **Section II (Part 2)**: Core Architecture & Attention Mechanism (Section 3.1 Model Architecture & 3.2 Multi-Head Attention)*
 #### **Model Architecture (The Framework: The Multi-Stage Stack)** (Section 3.1 Encoder and Decoder Stacks)
 Residual Connection: "The Highway System" - 신호 감쇄를 막는 고속도로.
 LayerNorm: "The Voltage Regulator" - 각 층의 출력을 표준 범위 내로 가두는 전압 조절기.

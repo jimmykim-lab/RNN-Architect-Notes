@@ -6,7 +6,7 @@ This repository documents a rigorous journey through Sequence Models, focusing o
 
 ---
 
-**Current Mission**: 🎯 [March 19] Deconstructing **Section 3.2 Attention Mechanism** (Multi-Head & Scaled Dot-Product) 
+**Current Mission**: 🎯 [March 20] Deconstructing Transformer Core (Sec 3.1 & 3.2)
 
 ---
 
@@ -58,6 +58,7 @@ After the structural autopsy of RNNs, I officially pivot to **Attention-based Ar
     - **SNR (Signal-to-Noise Ratio) Control**: Implemented $\sqrt{d_{model}}$ scaling as a form of Numerical Governance to preserve semantic signals against positional noise.
     - **Weight Sharing Strategy**: Analyzed the "Dual-End" efficiency where Input/Output embeddings share the same context map to slash VRAM consumption in half.
     - **Temporal DNA (Positional Encoding)**: Engineered a "Time without a Clock" using sinusoidal waves, transforming temporal order into a spatial coordinate system for $O(1)$ efficiency.
+- **Core Architecture & Attention (3/20 Target)**: Deep-dive into Sec 3.1 (Encoder/Decoder Stacks) & 3.2 (Multi-Head Attention) to formalize the DSO.ai heart logic.
 
 **6. Semantic Embedding & RAG Logic: The Coordinate System of Intelligence - [./notes/04_Semantic_Embedding_and_RAG_Logic.md](./notes/04_Semantic_Embedding_and_RAG_Logic.md) (3/18, commit : e2b72fb)**
 
@@ -68,6 +69,13 @@ To feed the Parallel Revolution, we must first redesign how data is represented.
 - **Anchoring Mechanism**: Established **Cosine Similarity** as the physical search engine to anchor AI's creative potential to 0.001ns-level technical spec manuals.
 - **Governance Layer**: Implemented mathematical **Debiasing (Neutralization/Equalization)** to eliminate tool-biased outliers and ensure engineering determinism.
 - **Strategic Asset**: Defined a "Standardized Chip Design Embedding" strategy to enable efficient **Transfer Learning** on private customer design flows.
+
+**7. Seq2Seq & Attention Mechanism: The Bottleneck Breaker - [./notes/05_Seq2Seq_and_Attention_Mechanism_The_Core.md](./notes/05_Seq2Seq_and_Attention_Mechanism_The_Core.md) (3/19, commit : 9e5a60b)**
+
+The final autopsy of RNN-based legacy systems. Mastered the core mechanics of "Selective Focus" before pivoting to pure matrix operations.
+- **The Information Bottleneck**: Identified the failure of fixed-length context vectors in handling long-spec technical manuals.
+- **The Alignment Model**: Analyzed the $T_x \times T_y$ complexity and the computational tax of $tanh$-based energy scores.
+- **Architect's Verdict**: Proved that while RNN-Attention solves the distance problem, it fails the **"Throughput Test,"** necessitating the move to purely matrix-based parallel operations.
 
 ---
 **Research SOP (Standard Operating Procedure)**

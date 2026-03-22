@@ -361,6 +361,7 @@
 ---
 
 ## III. Efficiency Quantization (Complexity Analysis)
+*🎯 [2026-03-23 Target]: Update Section III (Complexity Analysis - Section 4 Why Self-Attention Deep-Dive).*
 ### **Table 1: Comparison of Layer Types**
 | Layer Type | Complexity per Layer | Sequential Operations | Maximum Path Length |
 | :--- | :--- | :--- | :--- |

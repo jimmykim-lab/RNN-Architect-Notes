@@ -6,7 +6,9 @@ This repository documents a rigorous journey through Sequence Models, focusing o
 
 ---
 
-**Current Mission**: 🎯 [March 20] Deconstructing Transformer Core (Sec 3.1 & 3.2)
+**Current Mission**: 🎯 [March 23] Complexity Analysis of Transformer (Section 4 Why Self-Attention Deep-Dive).
+
+---
 
 ---
 
@@ -58,7 +60,11 @@ After the structural autopsy of RNNs, I officially pivot to **Attention-based Ar
     - **SNR (Signal-to-Noise Ratio) Control**: Implemented $\sqrt{d_{model}}$ scaling as a form of Numerical Governance to preserve semantic signals against positional noise.
     - **Weight Sharing Strategy**: Analyzed the "Dual-End" efficiency where Input/Output embeddings share the same context map to slash VRAM consumption in half.
     - **Temporal DNA (Positional Encoding)**: Engineered a "Time without a Clock" using sinusoidal waves, transforming temporal order into a spatial coordinate system for $O(1)$ efficiency.
-- **Core Architecture & Attention (3/20 Target)**: Deep-dive into Sec 3.1 (Encoder/Decoder Stacks) & 3.2 (Multi-Head Attention) to formalize the DSO.ai heart logic.
+- **Core Architecture & Intelligence (3/20)**: **[Paper Research 1/2 Finished]** Deep-dive into Sec 3.1~3.3 to formalize the DSO.ai heart logic.
+    - **Intelligence Distillation Tower**: Defined the $N=6$ stack as the minimum depth for transforming raw tokens into strategic representations.
+    - **Functional Asymmetry**: Mapped the **Encoder (Map Maker)** and **Decoder (Strategic Navigator)** roles for balanced understanding and execution.
+    - **Retrieval-Driven Generation**: Identified the **Encoder-Decoder Attention** as the architectural origin of RAG.
+- **Optimization & Complexity (3/23 Target)**: **[Paper Research 2/2 Initiation]** Upcoming deep-dive into **Section 4 (Why Self-Attention)** to analyze computational complexity thresholds ($n$ vs $d$) and interpretability.
 
 **6. Semantic Embedding & RAG Logic: The Coordinate System of Intelligence - [./notes/04_Semantic_Embedding_and_RAG_Logic.md](./notes/04_Semantic_Embedding_and_RAG_Logic.md) (3/18, commit : e2b72fb)**
 

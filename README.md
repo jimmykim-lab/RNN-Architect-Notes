@@ -51,7 +51,7 @@ The $O(n)$ sequential DNA of RNNs is the ultimate bottleneck for GPU utilization
 ---
 **Phase 2: The Parallel Revolution (Mid-March 2026 ~)**
 
-**5. Attention Is All You Need: The End of Sequential DNA - [./notes/03_Transformer_Architecture_Review.md](./notes/03_Transformer_Architecture_Review.md) (3/16 ~ 3/19, commit : 5eb84dd/96749bc, Ongoing)**
+**5. Attention Is All You Need: The End of Sequential DNA - [./notes/03_Transformer_Architecture_Review.md](./notes/03_Transformer_Architecture_Review.md) (3/16 ~ 3/20, commit : 5eb84dd/96749bc/9f1ef50, Ongoing)**
 
 After the structural autopsy of RNNs, I officially pivot to **Attention-based Architectures**. This entry deconstructs the Transformer not just as a model, but as a high-throughput **Parallel Engine**.
 

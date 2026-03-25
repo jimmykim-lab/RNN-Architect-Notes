@@ -5,12 +5,13 @@
     - ✅ [2026-03-16] **Section I & III Complete**: Analysis of Section 1 Introduction, Section 2 Background, and Complexity ($O(n)$ vs $O(1)$ via Table 1).
     - ✅ [2026-03-18] **Section II (Part 1) Complete**: The Input Pipeline (Section 3.4 Embeddings & 3.5 Positional Encoding).
     - ✅ [2026-03-20]: **Section II (Part 2) Complete**: Core Architecture & Attention Mechanism (Section 3.1 Model Architecture & 3.2 Multi-Head Attention & 3.3 Point-wise Feed-Forward Networks).
-    - 🎯 [2026-03-23 ~ 03-27 Target] **Section III, IV, V & Final Synthesis**: Optimization, Results, and Strategic Domain Adaptation. (Section 4, Section 5, Section 6, Section7)
-        - 📅 [2026-03-23]: Update Section III (Complexity Analysis - Section 4 Why Self-Attention Deep-Dive).
-        - 📅 [2026-03-24]: Update Section IV (Systematic Evaluation - Section 5 Training & Stability Logic).
-        - 📅 [2026-03-25]: Update Section V (Final Verdict - Section 6 Results & Section 7 Conclusion).
-        - 📅 [2026-03-26]: Update Section IV (Systematic Evaluation - Strategic Domain Adaptation for Chip Design).
-        - 📅 [2026-03-27]: Update Section V (Final Verdict - Hardware-Aware Quantization & Technical Proposal).
+    - ✅ [2026-03-24] **Section II & Section III Refinement**: Integrated Andrew Ng's Intuition on Q/K/V Database logic and Hardware-aware Efficiency.
+    - 🎯 [2026-03-25 ~ 03-27 Target] **Section III, IV, V & Final Synthesis**: Optimization, Results, and Strategic Domain Adaptation. (Section 4, Section 5, Section 6, Section7)
+        - 📅 [2026-03-25]: Update Section III (Complexity Analysis - Section 4 Why Self-Attention Deep-Dive).
+        - 📅 [2026-03-26]: Update Section IV (Systematic Evaluation - Section 5 Training & Stability Logic).
+        - 📅 [2026-03-27]: Update Section V (Final Verdict - Section 6 Results & Section 7 Conclusion).
+        - 📅 [2026-03-28]: Update Section IV (Systematic Evaluation - Strategic Domain Adaptation for Chip Design).
+        - 📅 [2026-03-28]: Update Section V (Final Verdict - Hardware-Aware Quantization & Technical Proposal).
 - **Goal**: Deconstruct the Transformer architecture and establish a Hardware-Aware Technical Proposal for Semiconductor Design Automation.
 
 ---
@@ -202,7 +203,6 @@
         This is the **"Multi-Dimensional Radar"** of our system. In **Agentic AI**, one head acts as a sensor for **Technical Constraints** (e.g., API schemas, token limits), while another head monitors **Contextual Nuance** (e.g., user intent, business goals). 
         By filtering the same data through 8 different "specialist eyes" simultaneously, the model avoids the "averaging effect" of a single-head system. It achieves **Deterministic Intelligence** by ensuring that critical details(like a specific constraint) are not drowned out by general context, allowing the agent to 'see' the technical floorplan and the user's aesthetic preferences at the same time.
 
-
 #### **The Infrastructure: Stabilization & Bypass (Residual & LayerNorm)** (Section 3.1 Encoder and Decoder Stacks)
 - *"We employ a **residual connection** around each of the two sub-layers, followed by **layer normalization**."*
 - *"Output of each sub-layer is $\text{LayerNorm}(x + \text{Sublayer}(x))$."*
@@ -354,7 +354,7 @@
     - **Functional Asymmetry (The Map vs. The Compass)**: 
         The structural difference between the Encoder and Decoder reveals an **Asymmetry of Intelligence**. The **Encoder** swallows all information at once (**Bidirectional**) to draw a high-density "Knowledge Map," while the **Decoder** takes careful, **Auto-regressive** steps, constantly checking that map (via Encoder-Decoder Attention) before moving forward. It is the balance between "Holistic Understanding" and "Precise Execution."
     - **The Cross-Communication Bridge (Knowledge Retrieval)**: 
-        The **Encoder-Decoder Attention** is the most critical link in orchestration. This **'Third Sub-layer'** in the decoder is effectively the **origin of intelligent RAG (Retrieval-Augmented Generation)**. It functions as a **Dynamic Knowledge Retrieval** step where the Decoder uses its current state as a **Query** to "ask" the Encoder's Contextual Memory for the most relevant facts. This ensures every generated token is grounded in provided evidence, serving as the core engine for **Evidence-Based Reasoning**.
+        The **Encoder-Decoder Attention** is the most critical link in orchestration. This **'Third Sub-layer'** in the decoder is effectively the **origin of intelligent RAG (Retrieval-Augmented Generation)**. It functions as a **Dynamic Knowledge Retrieval** step where the Decoder uses its current state as a **Query** to "ask" the Encoder's Contextual Memory (**Key ($K$)** and **Value ($V$)**) for the most relevant facts. This ensures every generated token is not a "hallucinated guess" but grounded in provided evidence, serving as the core engine for **Evidence-Based Reasoning**.
     - **The Firewall of Causality (Deterministic Loop)**: 
         Masking is the architectural implementation of **Causality**. It guarantees a **Deterministic Reasoning Loop** ($Plan \to Act \to Reflect$), ensuring that each step of the agent's execution is a logical consequence of its past actions and the given context, preventing temporal hallucinations.
 

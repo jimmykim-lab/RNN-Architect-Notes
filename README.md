@@ -6,7 +6,7 @@ This repository documents a rigorous journey through Sequence Models, focusing o
 
 ---
 
-**Current Mission**: 🎯 [March 23] Complexity Analysis of Transformer (Section 4 Why Self-Attention Deep-Dive).
+**Current Mission**: 🎯 [March 26] Systematic Evaluation & Strategic Domain Adaptation (Section 5 Training & Stability Logic).
 
 ---
 
@@ -54,20 +54,30 @@ The $O(n)$ sequential DNA of RNNs is the ultimate bottleneck for GPU utilization
 
 ## **Phase 2: The Parallel Revolution (Mid-March 2026 ~)**
 
-### **5. Attention Is All You Need: The End of Sequential DNA - [./notes/03_Transformer_Architecture_Review.md](./notes/03_Transformer_Architecture_Review.md) (3/16 ~ 3/20, commit : 5eb84dd/96749bc/9f1ef50, Ongoing)**
+### **5. Attention Is All You Need: The End of Sequential DNA - [./notes/03_Transformer_Architecture_Review.md](./notes/03_Transformer_Architecture_Review.md) (3/16 ~ 3/25, commit : 5eb84dd/96749bc/9f1ef50/4b7c901, Ongoing)**
 
 After the structural autopsy of RNNs, I officially pivot to **Attention-based Architectures**. This entry deconstructs the Transformer not just as a model, but as a high-throughput **Parallel Engine**.
 
-- **The O(1) Revolution (3/16)**: Quantified how Transformer reduces the maximum path length to $O(1)$, enabling true hardware parallelization (SIMD) and constant-time "information teleportation."
-- **Input Pipeline & Numerical Governance (3/18 ~ 3/19)**: A deep dive into Section 3.4 & 3.5 to master the "Materials" before the logic.
+- #### **The O(1) Revolution (3/16)**: Quantified how Transformer reduces the maximum path length to $O(1)$, enabling true hardware parallelization (SIMD) and constant-time "information teleportation."
+
+- #### **Input Pipeline & Numerical Governance (3/18 ~ 3/19)**: A deep dive into Section 3.4 & 3.5 to master the "Materials" before the logic
+
   - **SNR (Signal-to-Noise Ratio) Control**: Implemented $\sqrt{d_{model}}$ scaling as a form of Numerical Governance to preserve semantic signals against positional noise.
   - **Weight Sharing Strategy**: Analyzed the "Dual-End" efficiency where Input/Output embeddings share the same context map to slash VRAM consumption in half.
   - **Temporal DNA (Positional Encoding)**: Engineered a "Time without a Clock" using sinusoidal waves, transforming temporal order into a spatial coordinate system for $O(1)$ efficiency.
-- **Core Architecture & Intelligence (3/20)**: **[Paper Research 1/2 Finished]** Deep-dive into Sec 3.1~3.3 to formalize the DSO.ai heart logic.
+- **Core Architecture & Intelligence (3/20)**: Deep-dive into Sec 3.1~3.3 to formalize the DSO.ai heart logic.
   - **Intelligence Distillation Tower**: Defined the $N=6$ stack as the minimum depth for transforming raw tokens into strategic representations.
   - **Functional Asymmetry**: Mapped the **Encoder (Map Maker)** and **Decoder (Strategic Navigator)** roles for balanced understanding and execution.
   - **Retrieval-Driven Generation**: Identified the **Encoder-Decoder Attention** as the architectural origin of RAG.
-- **Optimization & Complexity (3/23 Target)**: **[Paper Research 2/2 Initiation]** Upcoming deep-dive into **Section 4 (Why Self-Attention)** to analyze computational complexity thresholds ($n$ vs $d$) and interpretability.
+
+- #### **Complexity & Section 4 Deep-dive (3/25)**: **[Paper Research 2/2 Complete]** Proved the mathematical superiority of Self-Attention via Section 4 analysis
+
+  - **Information Teleportation**: Mathematically verified how $O(1)$ path length solves the vanishing gradient issue by enabling direct signal flow.
+  - **Hardware Efficiency**: Analyzed the $n$ vs. $d$ complexity threshold and the benefits of **SIMD (Single Instruction, Multiple Data)** over RNN's serial bottleneck.
+  - **Restricted Attention**: Established a **"Hardware-Aware Fallback"** strategy for extreme sequences (multi-million gate netlists) using sliding window mechanisms.
+  - **Deterministic Audit Trail**: Defined Attention Maps as the core for **Explainable EDA**, providing a transparent trace for design decisions.
+
+- #### **Systematic Evaluation & Training Logic (3/26 Target)**: Upcoming analysis of **Section 5 (Training)** to master optimization stability and hardware-aware domain adaptation
 
 ### **6. Semantic Embedding & RAG Logic: The Coordinate System of Intelligence - [./notes/04_Semantic_Embedding_and_RAG_Logic.md](./notes/04_Semantic_Embedding_and_RAG_Logic.md) (3/18, commit : e2b72fb)**
 

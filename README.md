@@ -12,23 +12,25 @@ This repository documents a rigorous journey through Sequence Models, focusing o
 
 ---
 
-**Phase 1: Core Sequence Engines (March 2026)**
+## **Phase 1: Core Sequence Engines (March 2026)**
 
-**1. Standard RNN & The BPTT Deep Dive - [./notes/01_Basic RNN_BPTT_and_Vanishing_Gradient.md](./notes/01_Basic%20RNN_BPTT_and_Vanishing_Gradient.md) (3/11, commit : 417b115, 76c0a35)**
+### **1. Standard RNN & The BPTT Deep Dive - [./notes/01_Basic RNN_BPTT_and_Vanishing_Gradient.md](./notes/01_Basic%20RNN_BPTT_and_Vanishing_Gradient.md) (3/11, commit : 417b115, 76c0a35)**
 
 The foundation of sequential processing, where I explored the mathematical boundaries of gradient flow.
+
 - **BPTT (Backpropagation Through Time)**: Implemented the full derivative chain from scratch to understand how information travels (and dies) across time.
 - **The Vanishing Gradient Problem**: Documented the "Why" behind the need for gated architectures. Proved mathematically why long-term dependencies fail in basic RNNs.
 - **Deliverables**: Vectorized forward/backward pass for standard RNN cells.
 
-**2. GRU (Gated Recurrent Unit) - Efficiency & Speed (3/12, commit : 9717d48)**
+### **2. GRU (Gated Recurrent Unit) - Efficiency & Speed (3/12, commit : 9717d48)**
 
 A streamlined approach to memory management, focusing on computational throughput without sacrificing performance.
+
 - **Gate Logic**: Implemented Update and Reset gates to control information flow.
 - **Optimization**: Designed for lower parameter counts, making it the "lightweight fighter jet" of sequence models.
 - **Key Insight**: Balanced the trade-off between memory capacity and execution speed.
 
-**3. LSTM (Long Short-Term Memory) - The Memory Highway (3/13, commit : 5322875)**
+### **3. LSTM (Long Short-Term Memory) - The Memory Highway (3/13, commit : 5322875)**
 
 The most sophisticated engine in the 1st phase, engineered for high-fidelity long-term memory.
 
@@ -36,37 +38,38 @@ The most sophisticated engine in the 1st phase, engineered for high-fidelity lon
 - **The Cell State (c)**: Implemented a dedicated "Long-term Memory Highway" to persist critical information across long sequences.
 - **Gating Precision**: Forget, Update, and Output gates implemented via Hadamard products for exact signal filtering.
 
-**4. RNN Final Bridge (Bidirectional & Deep RNNs) - [./notes/02_RNN_Final_Bridge_analysis.md](./notes/02_RNN_Final_Bridge_Analysis.md) (3/16, commit : 8bcb98e)**
+### **4. RNN Final Bridge (Bidirectional & Deep RNNs) - [./notes/02_RNN_Final_Bridge_analysis.md](./notes/02_RNN_Final_Bridge_Analysis.md) (3/16, commit : 8bcb98e)**
 
 Despite architectural variations like Bidirectional or Deep layers, the $O(n)$ sequential dependency remains.
-The $O(n)$ sequential DNA of RNNs is the ultimate bottleneck for GPU utilization. 
+The $O(n)$ sequential DNA of RNNs is the ultimate bottleneck for GPU utilization.
 
 - **Bidirectional RNNs (BRNN)**
-    - **Observation**: Future context awareness comes at the cost of 2x computation and 100% latency.
-    - **Verdict**: "Causality breaking" makes it unsuitable for real-time monitoring in my "Cockpit" architecture.
+  - **Observation**: Future context awareness comes at the cost of 2x computation and 100% latency.
+  - **Verdict**: "Causality breaking" makes it unsuitable for real-time monitoring in my "Cockpit" architecture.
 - **Deep (Stacked) RNNs (DRNN)**
-    - **Observation**: Stacking increases model capacity but creates a "Double Vanishing" problem (Time + Depth).
-    - **Verdict**: Inefficient for scaling; more parameters do not solve the sequential bottleneck.    
+  - **Observation**: Stacking increases model capacity but creates a "Double Vanishing" problem (Time + Depth).
+  - **Verdict**: Inefficient for scaling; more parameters do not solve the sequential bottleneck.
 
 ---
-**Phase 2: The Parallel Revolution (Mid-March 2026 ~)**
 
-**5. Attention Is All You Need: The End of Sequential DNA - [./notes/03_Transformer_Architecture_Review.md](./notes/03_Transformer_Architecture_Review.md) (3/16 ~ 3/20, commit : 5eb84dd/96749bc/9f1ef50, Ongoing)**
+## **Phase 2: The Parallel Revolution (Mid-March 2026 ~)**
+
+### **5. Attention Is All You Need: The End of Sequential DNA - [./notes/03_Transformer_Architecture_Review.md](./notes/03_Transformer_Architecture_Review.md) (3/16 ~ 3/20, commit : 5eb84dd/96749bc/9f1ef50, Ongoing)**
 
 After the structural autopsy of RNNs, I officially pivot to **Attention-based Architectures**. This entry deconstructs the Transformer not just as a model, but as a high-throughput **Parallel Engine**.
 
 - **The O(1) Revolution (3/16)**: Quantified how Transformer reduces the maximum path length to $O(1)$, enabling true hardware parallelization (SIMD) and constant-time "information teleportation."
 - **Input Pipeline & Numerical Governance (3/18 ~ 3/19)**: A deep dive into Section 3.4 & 3.5 to master the "Materials" before the logic.
-    - **SNR (Signal-to-Noise Ratio) Control**: Implemented $\sqrt{d_{model}}$ scaling as a form of Numerical Governance to preserve semantic signals against positional noise.
-    - **Weight Sharing Strategy**: Analyzed the "Dual-End" efficiency where Input/Output embeddings share the same context map to slash VRAM consumption in half.
-    - **Temporal DNA (Positional Encoding)**: Engineered a "Time without a Clock" using sinusoidal waves, transforming temporal order into a spatial coordinate system for $O(1)$ efficiency.
+  - **SNR (Signal-to-Noise Ratio) Control**: Implemented $\sqrt{d_{model}}$ scaling as a form of Numerical Governance to preserve semantic signals against positional noise.
+  - **Weight Sharing Strategy**: Analyzed the "Dual-End" efficiency where Input/Output embeddings share the same context map to slash VRAM consumption in half.
+  - **Temporal DNA (Positional Encoding)**: Engineered a "Time without a Clock" using sinusoidal waves, transforming temporal order into a spatial coordinate system for $O(1)$ efficiency.
 - **Core Architecture & Intelligence (3/20)**: **[Paper Research 1/2 Finished]** Deep-dive into Sec 3.1~3.3 to formalize the DSO.ai heart logic.
-    - **Intelligence Distillation Tower**: Defined the $N=6$ stack as the minimum depth for transforming raw tokens into strategic representations.
-    - **Functional Asymmetry**: Mapped the **Encoder (Map Maker)** and **Decoder (Strategic Navigator)** roles for balanced understanding and execution.
-    - **Retrieval-Driven Generation**: Identified the **Encoder-Decoder Attention** as the architectural origin of RAG.
+  - **Intelligence Distillation Tower**: Defined the $N=6$ stack as the minimum depth for transforming raw tokens into strategic representations.
+  - **Functional Asymmetry**: Mapped the **Encoder (Map Maker)** and **Decoder (Strategic Navigator)** roles for balanced understanding and execution.
+  - **Retrieval-Driven Generation**: Identified the **Encoder-Decoder Attention** as the architectural origin of RAG.
 - **Optimization & Complexity (3/23 Target)**: **[Paper Research 2/2 Initiation]** Upcoming deep-dive into **Section 4 (Why Self-Attention)** to analyze computational complexity thresholds ($n$ vs $d$) and interpretability.
 
-**6. Semantic Embedding & RAG Logic: The Coordinate System of Intelligence - [./notes/04_Semantic_Embedding_and_RAG_Logic.md](./notes/04_Semantic_Embedding_and_RAG_Logic.md) (3/18, commit : e2b72fb)**
+### **6. Semantic Embedding & RAG Logic: The Coordinate System of Intelligence - [./notes/04_Semantic_Embedding_and_RAG_Logic.md](./notes/04_Semantic_Embedding_and_RAG_Logic.md) (3/18, commit : e2b72fb)**
 
 To feed the Parallel Revolution, we must first redesign how data is represented. This entry defines the **Geometric World Model** for the DSO.ai engine.
 
@@ -76,17 +79,20 @@ To feed the Parallel Revolution, we must first redesign how data is represented.
 - **Governance Layer**: Implemented mathematical **Debiasing (Neutralization/Equalization)** to eliminate tool-biased outliers and ensure engineering determinism.
 - **Strategic Asset**: Defined a "Standardized Chip Design Embedding" strategy to enable efficient **Transfer Learning** on private customer design flows.
 
-**7. Seq2Seq & Attention Mechanism: The Bottleneck Breaker - [./notes/05_Seq2Seq_and_Attention_Mechanism_The_Core.md](./notes/05_Seq2Seq_and_Attention_Mechanism_The_Core.md) (3/19, commit : 9e5a60b)**
+### **7. Seq2Seq & Attention Mechanism: The Bottleneck Breaker - [./notes/05_Seq2Seq_and_Attention_Mechanism_The_Core.md](./notes/05_Seq2Seq_and_Attention_Mechanism_The_Core.md) (3/19, commit : 9e5a60b)**
 
 The final autopsy of RNN-based legacy systems. Mastered the core mechanics of "Selective Focus" before pivoting to pure matrix operations.
+
 - **The Information Bottleneck**: Identified the failure of fixed-length context vectors in handling long-spec technical manuals.
 - **The Alignment Model**: Analyzed the $T_x \times T_y$ complexity and the computational tax of $tanh$-based energy scores.
 - **Architect's Verdict**: Proved that while RNN-Attention solves the distance problem, it fails the **"Throughput Test,"** necessitating the move to purely matrix-based parallel operations.
 
 ---
-**Research SOP (Standard Operating Procedure)**
+
+## **Research SOP (Standard Operating Procedure)**
 
 To ensure bulletproof thinking, every major architecture is vetted through a 5-step protocol:
+
 1. **Identify the Villain**: Define the core hardware/mathematical bottleneck.
 2. **Systematic Evaluation**: Comparative analysis of complexity.
 3. **Efficiency Quantization**: Benchmarking $O(n)$ vs. $O(1)$ operations.
@@ -94,15 +100,19 @@ To ensure bulletproof thinking, every major architecture is vetted through a 5-s
 5. **Technical Proposal**: Final verdict on adoption for the DSO.ai engine.
 
 ---
-**Technical Validation (The Stress Test)**
+
+## **Technical Validation (The Stress Test)**
 
 Every engine is verified through a rigorous Architect's Testbench (rnn_testbench.py):
+
 1. **Mathematical Consistency**: Verified that Softmax output probabilities sum to exactly 1.0 for all timesteps.
 2. **State Stability**: Monitored the L2 Norm of the Cell State to ensure stable signal propagation without numerical exploding/vanishing.
 3. **BPTT Readiness**: Confirmed that intermediate gate values (caches) are perfectly preserved for the upcoming backward pass phase.
 
 ---
+
 ## Project Structure
+
 ```text
 .
 ├── src/

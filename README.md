@@ -77,7 +77,7 @@ After the structural autopsy of RNNs, I officially pivot to **Attention-based Ar
   - **Restricted Attention**: Established a **"Hardware-Aware Fallback"** strategy for extreme sequences (multi-million gate netlists) using sliding window mechanisms.
   - **Deterministic Audit Trail**: Defined Attention Maps as the core for **Explainable EDA**, providing a transparent trace for design decisions.
 
-- #### **Systematic Evaluation & Training Logic (3/26 Target)**: Upcoming analysis of **Section 5 (Training)** to master optimization stability and hardware-aware domain adaptation
+- #### **Systematic Evaluation & Training Logic (🎯 3/26 Target)**: Upcoming analysis of **Section 5 (Training)** to master optimization stability and hardware-aware domain adaptation
 
 ### **6. Semantic Embedding & RAG Logic: The Coordinate System of Intelligence - [./notes/04_Semantic_Embedding_and_RAG_Logic.md](./notes/04_Semantic_Embedding_and_RAG_Logic.md) (3/18, commit : e2b72fb)**
 
@@ -96,6 +96,18 @@ The final autopsy of RNN-based legacy systems. Mastered the core mechanics of "S
 - **The Information Bottleneck**: Identified the failure of fixed-length context vectors in handling long-spec technical manuals.
 - **The Alignment Model**: Analyzed the $T_x \times T_y$ complexity and the computational tax of $tanh$-based energy scores.
 - **Architect's Verdict**: Proved that while RNN-Attention solves the distance problem, it fails the **"Throughput Test,"** necessitating the move to purely matrix-based parallel operations.
+
+---
+
+## **Phase 3: Agentic Evolution (Late-March 2026 ~)**
+
+### **8. Agent Skills & Tool-Use Architecture - [./notes/06_Agent_Skill_Architecture_and_Tool_Use.md](./notes/06_Agent_Skill_Architecture_and_Tool_Use.md) (3/26, commit : 13f8f93)**
+
+After mastering the "Brain" (Transformer Architecture), this phase focuses on the "Limbs"—the mechanism of physical execution.
+
+- **The Neural Link (Lessons 1-3)**: Established the fundamental contract between probabilistic LLMs and deterministic engineering tools via **JSON Schema**.
+- **Bridging to Production**: Successfully mapped the theoretical transition from **Attention** (Information Retrieval) to **Agency** (Physical Tool-Use).
+- **The IOS Bridge**: Officially linked theoretical research to the **[Intelligent Orchestration System](https://github.com/jimmykim-lab/Intelligent-Orchestration-System)** for real-world production deployment.
 
 ---
 

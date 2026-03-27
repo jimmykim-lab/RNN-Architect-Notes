@@ -13,4 +13,4 @@
 - **From Attention to Action**: The Encoder-Decoder Attention mechanism (Retrieval) is now evolved into **Tool-Use Observation** (Execution).
 - **Technical Transition**: Detailed implementation and the "Execution Pillar" of my architecture are managed in the **Intelligent Orchestration System**.
 
-> **[Link to Production Spec]**: [Intelligent-Orchestration-System/whitepaper/02_Skill_Architecture_and_Governance.md](https://github.com/jimmykim-lab/Intelligent-Orchestration-System/blob/main/whitepaper/02_Skill_Architecture_and_Governance.md)
+> **[Link to Production Spec]**: [Intelligent-Orchestration-System/whitepaper/01_Intelligent_Orchestration_System_Blueprint.md](https://github.com/jimmykim-lab/Intelligent-Orchestration-System/blob/main/whitepaper/01_Intelligent_Orchestration_System_Blueprint.md)

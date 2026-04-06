@@ -102,7 +102,7 @@ The final autopsy of RNN-based legacy systems. Mastered the core mechanics of "S
 
 ## **Phase 3: Agentic Evolution (Late-March 2026 ~)**
 
-### **8. Agent Skills & Tool-Use Architecture - [./notes/06_Agent_Skill_Architecture_and_Tool_Use.md](./notes/06_Agent_Skill_Architecture_and_Tool_Use.md) (3/26, 4/3 commit : 13f8f93, e187975)**
+### **8. Agent Skills & Tool-Use Architecture - [./notes/06_Agent_Skill_Architecture_and_Tool_Use.md](./notes/06_Agent_Skill_Architecture_and_Tool_Use.md) (3/26, 4/3, 4/5 commit : 13f8f93, e187975, 76ae19b)**
 
 After mastering the "Brain" (Transformer Architecture), this phase focuses on the "Limbs"—the mechanism of physical execution.
 

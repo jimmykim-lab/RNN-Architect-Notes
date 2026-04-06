@@ -71,6 +71,8 @@ Full validation completed in the IOS repository.
   - SKILL.md description is the agent's sole decision criterion — write it with precision
   - `full_reasoning_cycle.py` is forced execution for CI/CD, not autonomous reasoning
   - The need for a Skills Lifecycle Management System was proven in production
+  - **Skills ceiling discovered**: Agent answered "VDD_IO IR drop → timing impact?" using general electronics knowledge, not tool-specific causal relationships. SKILL.md covers "what to run" — not "why it matters between tools."
+  - **Ontology gap**: Inter-tool causality (PrimeTime → ICC2 → StarRC) cannot be expressed in SKILL.md, fine-tuning, RAG, or MCP alone. Requires explicit EDA Ontology Layer.
 
 ---
 
@@ -88,5 +90,7 @@ System Provider enterprise deployments.
 - Cross-Platform Normalization standard under design
 
 > **[Link to Production Spec]**: [Intelligent-Orchestration-System/whitepaper/01_Intelligent_Orchestration_System_Blueprint.md](https://github.com/jimmykim-lab/Intelligent-Orchestration-System/blob/main/whitepaper/01_Intelligent_Orchestration_System_Blueprint.md)
-
+>
 > **[Link to Production Spec]**: [Intelligent-Orchestration-System/whitepaper/02_Skill_Architecture_and_Governance.md](https://github.com/jimmykim-lab/Intelligent-Orchestration-System/blob/main/whitepaper/02_Skill_Architecture_and_Governance.md)
+>
+> **[Link to Production Spec]**: [Intelligent-Orchestration-System/whitepaper/03_EDA_Ontology_Layer.md](https://github.com/jimmykim-lab/Intelligent-Orchestration-System/blob/main/whitepaper/03_EDA_Ontology_Layer.md)

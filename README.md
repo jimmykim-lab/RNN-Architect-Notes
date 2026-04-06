@@ -6,7 +6,7 @@ This repository documents a rigorous journey through Sequence Models, focusing o
 
 ---
 
-**Current Mission**: 🎯 [April 03] EDA Skill Pack Production Validation Complete. 
+**Current Mission**: 🎯 [April 05] EDA Ontology Layer v0.1 defined — Skills ceiling discovered, inter-tool causal reasoning gap identified.
 **Next**: Transformer Implementation & LangChain Intro (April Week 2~4).
 
 ---
@@ -112,6 +112,8 @@ After mastering the "Brain" (Transformer Architecture), this phase focuses on th
 - **The Muscular Precision (Lessons 4-6)**: Mastered advanced implementation and cross-platform governance. Validated Priority Protocol (Customer Skills > SP Baseline) and Full Reasoning Cycle (Plan → Act → Reflect) in production.
 - **Production Validation**: Deployed EDA Skill Pack in IOS repository — sp_get-timing-report, sp_fix-drc-violation, sp_get-power-report (SP Baseline) + get-timing-report, fix-drc-violation, optimize-power-grid (Customer Override). Full PPA optimization cycle verified via multi-step skill chaining.
 - **Strategic Discovery**: Identified Governance Vacuum in cross-platform skill deployment. Designed Skills Lifecycle Management System architecture   as next product moat — `sp_` namespace firewall + Priority Protocol + Cross-Platform Normalization.
+- **Skills Ceiling & Ontology Discovery**: Discovered that SKILL.md covers "what to run" but not "why it matters between tools." Inter-tool causality 
+  (PrimeTime → ICC2 → StarRC) cannot be expressed in Skills, RAG, fine-tuning, or MCP alone. Defined EDA Ontology Layer as the missing reasoning foundation. ➔ [**03. EDA Ontology Layer**](https://github.com/jimmykim-lab/Intelligent-Orchestration-System/blob/main/whitepaper/03_EDA_Ontology_Layer.md)
 
 ---
 

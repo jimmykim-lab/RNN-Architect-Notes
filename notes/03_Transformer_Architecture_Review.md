@@ -1,17 +1,17 @@
 # [Architecture Review] Attention Is All You Need: The End of Sequential DNA - [Link to Paper : Attention IS All You Need](https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf)
 
-- **Date**: 2026-03-16 (Start) - 2026-03-27 (Target)
+- **Date**: 2026-03-16 (Start) - 2026-04-06 (Target)
 - **Status**:
   - ✅ [2026-03-16] **Section I & III Complete**: Analysis of Section 1 Introduction, Section 2 Background, and Complexity ($O(n)$ vs $O(1)$ via Table 1).
   - ✅ [2026-03-18] **Section II (Part 1) Complete**: The Input Pipeline (Section 3.4 Embeddings & 3.5 Positional Encoding).
   - ✅ [2026-03-20]: **Section II (Part 2) Complete**: Core Architecture & Attention Mechanism (Section 3.1 Model Architecture & 3.2 Multi-Head Attention & 3.3 Point-wise Feed-Forward Networks).
   - ✅ [2026-03-24] **Section II & Section III Refinement**: Integrated Andrew Ng's Intuition on Q/K/V Database logic and Hardware-aware Efficiency.
-  - 🎯 [2026-03-25 ~ 03-27 Target] **Section III, IV, V & Final Synthesis**: Optimization, Results, and Strategic Domain Adaptation. (Section 4, Section 5, Section 6, Section7)
+  - 🎯 [2026-03-25 ~ 04-06 Target] **Section III, IV, V & Final Synthesis**: Optimization, Results, and Strategic Domain Adaptation. (Section 4, Section 5, Section 6, Section7)
     - ✅ [2026-03-25]: Update Section III (Complexity Analysis - Section 4 Why Self-Attention Deep-Dive).
-    - 🎯 [2026-03-26]: Update Section IV (Systematic Evaluation - Section 5 Training & Stability Logic).
-    - 📅 [2026-03-27]: Update Section V (Final Verdict - Section 6 Results & Section 7 Conclusion).
-    - 📅 [2026-03-28]: Update Section IV (Systematic Evaluation - Strategic Domain Adaptation for Chip Design).
-    - 📅 [2026-03-28]: Update Section V (Final Verdict - Hardware-Aware Quantization & Technical Proposal).
+    - ✅ [2026-04-06]: Update Section IV (Systematic Evaluation - Section 5 Training & Stability Logic).
+    - ✅ [2026-04-06]: Update Section V (Final Verdict - Section 6 Results & Section 7 Conclusion).
+    - 📅 [2026-04-06]: Update Section IV (Systematic Evaluation - Strategic Domain Adaptation for Chip Design).
+    - 📅 [2026-04-06]: Update Section V (Final Verdict - Hardware-Aware Quantization & Technical Proposal).
 - **Goal**: Deconstruct the Transformer architecture and establish a Hardware-Aware Technical Proposal for Semiconductor Design Automation.
 
 ---
@@ -421,19 +421,26 @@
 
 ---
 
-## IV. Systematic Evaluation (AI-driven Chip Design System Strategic Insight)
+## IV. Systematic Evaluation (Section 5 Training)
 
-*🎯 [2026-03-26 Target]: Update Section IV (Systematic Evaluation - Section 5 Training & Stability Logic).*
-*SOP의 핵심: 이 엔진을 실제 우리 제품에 어떻게 이식할 것인가.*
+### Training Stability Protocol
 
-- **Reliability Assessment**: Training stability vs. RNN's vanishing gradient.
-- **Proposed Application**: How Attention can optimize Chip Design Layout bottlenecks.
+- **Adam Optimizer**: β1=0.9, β2=0.98. Warmup over 4,000 steps → LR increases linearly, then decays proportionally to inverse square root of step number.
+- **Regularization**: Dropout(0.1) + Label Smoothing(ε=0.1) — prevents overfitting and calibrates output confidence.
+- **Architect's View**: Training stability is the prerequisite for inference reliability. The Warmup schedule is the training-time implementation of "Engineering Determinism" — managing the unstable early phase before the model converges to a reliable reasoning state.
 
 ---
 
-## V. Final Verdict
+## V. Final Verdict (Section 6 Results & Section 7 Conclusion)
 
-- **Summary**: (예: Transformer is not just a model; it's a hardware-aware optimization paradigm.)
+### Ablation Study: The Intelligence Threshold
+
+- **Optimal Configuration**: h=8 heads, dk=64. Reducing heads degrades performance; increasing them yields no gain → a clear design threshold exists.
+- **Architect's View**: Head count = number of orchestration channels. h=8 is the empirically validated optimum for capturing the diversity of   relationships in complex sequential data — directly applicable to multi-variable chip design constraint monitoring.
+
+### Summary
+
+Transformer is not merely a model — it is a **Hardware-Aware Optimization Paradigm**. By compressing Sequential DNA into O(1) path length, it fully saturates GPU SIMD cores, establishing the architectural foundation for deterministic, scalable AI orchestration.
 
 ---
 

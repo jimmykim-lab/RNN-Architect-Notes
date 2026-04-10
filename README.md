@@ -87,7 +87,7 @@ After the structural autopsy of RNNs, I officially pivot to **Attention-based Ar
 
 ### **6. Semantic Embedding & RAG Logic: The Coordinate System of Intelligence - [./notes/04_Semantic_Embedding_and_RAG_Logic.md](./notes/04_Semantic_Embedding_and_RAG_Logic.md) (3/18, commit : e2b72fb)**
 
-To feed the Parallel Revolution, we must first redesign how data is represented. This entry defines the **Geometric World Model** for the DSO.ai engine.
+To feed the Parallel Revolution, we must first redesign how data is represented. This entry defines the **Geometric World Model** for the EDA automation engine
 
 - **Geometric Intelligence**: Transitioned from $O(V)$ symbolic one-hot encoding to $d_{model}$ high-dimensional dense vectors. Mapped fragmented design data into a **Single Integrated Coordinate System**.
 - **RAG (Retrieval-Augmented Generation)**: Designed the **"Safety Controller"** that bridges probabilistic AI and deterministic engineering.
@@ -130,7 +130,7 @@ To ensure bulletproof thinking, every major architecture is vetted through a 5-s
 2. **Systematic Evaluation**: Comparative analysis of complexity.
 3. **Efficiency Quantization**: Benchmarking $O(n)$ vs. $O(1)$ operations.
 4. **Strategic Insight**: Mapping the architecture to the "Cockpit" requirements.
-5. **Technical Proposal**: Final verdict on adoption for the DSO.ai engine.
+5. **Technical Proposal**: Final verdict on adoption for the EDA automation engine
 
 ---
 

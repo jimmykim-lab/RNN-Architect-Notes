@@ -1,10 +1,12 @@
 # RNN-Architect-Notes
 
-_**The Cockpit Architect: Mastering Sequential Intelligence from Scratch**_
+> **9 years of semiconductor design expertise meets AI architecture.**
+> This repository documents a rigorous journey from RNN fundamentals to Transformer mastery — mapped to real-world EDA automation challenges at Tier-1 semiconductor companies.
 
 This repository documents a rigorous journey through Sequence Models, focusing on **Architecture over Scripts**. It transforms deep-learning theory into robust, professional-grade "Cockpit" systems.
 
 ---
+
 **Current Mission**: ✅ [April 06] Transformer paper analysis complete (All Sections). 
 **Next**: Transformer Implementation & LangChain Intro (April Week 2~4).
 
@@ -65,7 +67,7 @@ After the structural autopsy of RNNs, I officially pivot to **Attention-based Ar
   - **SNR (Signal-to-Noise Ratio) Control**: Implemented $\sqrt{d_{model}}$ scaling as a form of Numerical Governance to preserve semantic signals against positional noise.
   - **Weight Sharing Strategy**: Analyzed the "Dual-End" efficiency where Input/Output embeddings share the same context map to slash VRAM consumption in half.
   - **Temporal DNA (Positional Encoding)**: Engineered a "Time without a Clock" using sinusoidal waves, transforming temporal order into a spatial coordinate system for $O(1)$ efficiency.
-- **Core Architecture & Intelligence (3/20)**: Deep-dive into Sec 3.1~3.3 to formalize the DSO.ai heart logic.
+- **Core Architecture & Intelligence (3/20)**: Deep-dive into Sec 3.1~3.3 to formalize the EDA automation engine logic.
   - **Intelligence Distillation Tower**: Defined the $N=6$ stack as the minimum depth for transforming raw tokens into strategic representations.
   - **Functional Asymmetry**: Mapped the **Encoder (Map Maker)** and **Decoder (Strategic Navigator)** roles for balanced understanding and execution.
   - **Retrieval-Driven Generation**: Identified the **Encoder-Decoder Attention** as the architectural origin of RAG.

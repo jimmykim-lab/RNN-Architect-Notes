@@ -1,3 +1,3 @@
 """
-RNN network package: Contains RNN network including atom cell, molecule and activcation functions
+Sequence Model package: Contains RNN/Transformer networks including atom cells, molecules, and activation functions.
 """

@@ -103,7 +103,7 @@ The final autopsy of RNN-based legacy systems. Mastered the core mechanics of "S
 - **The Alignment Model**: Analyzed the $T_x \times T_y$ complexity and the computational tax of $tanh$-based energy scores.
 - **Architect's Verdict**: Proved that while RNN-Attention solves the distance problem, it fails the **"Throughput Test,"** necessitating the move to purely matrix-based parallel operations.
 
-### **8. Transformer Encoder Implementation - [./src/transformer_encoder.py](./src/transformer_encoder.py) (4/10, commit : TBD)**
+### **8. Transformer Encoder Implementation - [./src/transformer_encoder.py](./src/transformer_encoder.py) (4/10, commit : f84534b)**
 
 Translated the fully analyzed Transformer theory into a working NumPy implementation. Every component is validated via shape consistency and numerical correctness checks.
 

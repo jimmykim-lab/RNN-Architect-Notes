@@ -85,7 +85,6 @@ class AddNorm:
         self.beta = parameters["beta"]
 
     def forward(self, X, sublayer_output):
-        # x + sublayer_output → LayerNorm
         """
         Implements a AddNorm layer
         
